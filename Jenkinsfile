@@ -22,6 +22,12 @@ pipeline {
             }
         }
 
+	stage('Test Application') {
+ 	   steps {
+               sh 'docker run --rm ${IMAGE_NAME}:${IMAGE_TAG} pytest test_app.py'
+    	    }
+	}	
+
         stage('Run Container') {
             steps {
                 sh 'docker rm -f ${CONTAINER_NAME} || true'
