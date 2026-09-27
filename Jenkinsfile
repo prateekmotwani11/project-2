@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    environment {
+        IMAGE_NAME = "project-2-app"
+        IMAGE_TAG = "${BUILD_NUMBER}"
+        CONTAINER_NAME = "project-2-container"
+    }
+
     stages {
 
         stage('Checkout') {
@@ -12,14 +18,14 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t project-2-app:latest .'
+                sh 'docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .'
             }
         }
 
         stage('Run Container') {
             steps {
-                sh 'docker rm -f project-2-container || true'
-                sh 'docker run -d --name project-2-container -p 5000:5000 project-2-app:latest'
+                sh 'docker rm -f ${CONTAINER_NAME} || true'
+                sh 'docker run -d --name ${CONTAINER_NAME} -p 5000:5000 ${IMAGE_NAME}:${IMAGE_TAG}'
             }
         }
 
