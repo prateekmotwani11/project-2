@@ -14,10 +14,11 @@ flowchart TD
     B -->|Webhook| C[Jenkins]
     C -->|Checkout| D[Source Code]
     D --> E[Build Docker Image]
-    E -->|Build Number Tag| F[Docker Image]
-    F --> G[Run Container]
-    G --> H[Health Check]
-    H --> I[Flask Application]
+    E --> F[Run Automated Tests]
+    F -->|Tests Passed| G[Docker Image]
+    G --> H[Run Container]
+    H --> I[Health Check]
+    I --> J[Flask Application]
 ```
 
 ## Technologies
@@ -44,10 +45,11 @@ The Jenkins pipeline performs the following stages:
 
 1. Checkout source code from GitHub
 2. Build Docker image
-3. Tag the image using the Jenkins build number
-4. Stop and remove the previous container
-5. Deploy the new container
-6. Perform an application health check
+3. Run automated application tests
+4. Tag the image using the Jenkins build number
+5. Stop and remove the previous container
+6. Deploy the new container
+7. Perform an application health check
 
 Example Docker image:
 
@@ -98,5 +100,6 @@ This project demonstrates:
 - Jenkins Pipeline as Code
 - Docker image creation
 - Versioned Docker images
+- Automated application testing with pytest
 - Automated container deployment
 - Automated application health checks
