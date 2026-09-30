@@ -1,4 +1,4 @@
-# Project 2 - Dockerized Flask CI/CD Pipeline
+# Flask Application CI/CD Pipeline Using Docker and Jenkins
 
 ## Overview
 
